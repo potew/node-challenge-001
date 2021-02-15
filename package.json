@@ -11,18 +11,25 @@
     "node": "12"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon --watch src --exec babel-node src/app.js"
+    "dev": "cross-env NODE_ENV=development nodemon --watch src --exec babel-node src/app.js",
+    "debug": "nodemon src/app.js"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/node": "^7.12.6",
     "cross-env": "^7.0.3",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.7"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "knex": "^0.21.12",
-    "objection": "^2.2.3",
-    "pg": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.16",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "objection": "^2.2.12",
+    "pg": "^8.5.1",
+    "sequelize": "^6.5.0",
+    "sha1": "^1.1.1"
   }
 }
