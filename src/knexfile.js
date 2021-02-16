@@ -1,13 +1,13 @@
 require('dotenv').config();
 
-const { ENGINE, HOST, USER, PASSWORD, DATABASE } = process.env;
+const { ENGINE, HOSTNAME, USER, PASSWORD, DATABASE } = process.env;
 
 module.exports = {
   development: {
     client: ENGINE,
     useNullAsDefault: true,
     connection: {
-      host: HOST,
+      host: HOSTNAME,
       user: USER,
       password: PASSWORD,
       database: DATABASE
@@ -16,7 +16,7 @@ module.exports = {
   production: {
     client: ENGINE,
     connection: {
-      host: HOST,
+      host: HOSTNAME,
       user: USER,
       password: PASSWORD,
       database: DATABASE

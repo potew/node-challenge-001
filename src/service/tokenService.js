@@ -1,25 +1,26 @@
 const jwt = require('jsonwebtoken');
 const { findByEmail } = require('./authorService');
 
-const { jwtsecret } = process.env;
+const { JWT_SECRET } = process.env;
 
 const jwtConfig = {
   expiresIn: '7d',
   algorithm: 'HS256',
 };
 
-const getToken = (payload) => jwt.sign({ payload }, jwtsecret, jwtConfig);
+// JWT encoding
+const getToken = (payload) => jwt.sign({ payload }, JWT_SECRET, jwtConfig);
 
 const authMiddleware = async (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
-    req.author = { id: 0 };
+    req.author = { id: 0, isAdmin: false };
     next();
   } else {
 
     try {
       // JWT decoding & validation
-      const { payload } = jwt.verify(token, jwtsecret);
+      const { payload } = jwt.verify(token, JWT_SECRET);
       const { email, password } = payload[0];
       const authorModel = await findByEmail(email);
       const authorObj = authorModel[0].toJSON()

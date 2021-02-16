@@ -34,11 +34,27 @@ const createAuthor = async (data) => {
   }
 };
 
-const updateAuthor = async (id, data) => {
-  try {
-    return await Authors.query().patchAndFetchById(id, data)
-  } catch (e) {
-    return genericErr(400, e);
+const updateAuthor = async (id, data, admin) => {
+  if (admin) {
+    try {
+      return await Authors.query().patchAndFetchById(id, data)
+    } catch (e) {
+      return genericErr(400, e);
+    }
+  } else {
+    return genericErr(403, { message: 'Operation denied for this user type.' });
+  }
+};
+
+const eraseAuthor = async (id, admin) => {
+  if (admin) {
+    try {
+      return await Authors.query().deleteById(id);
+    } catch (e) {
+      return genericErr(400, e);
+    }
+  } else {
+    return genericErr(403, { message: 'Operation denied for this user type.' });
   }
 };
 
@@ -46,4 +62,5 @@ module.exports = {
   findByEmail,
   createAuthor,
   updateAuthor,
+  eraseAuthor,
 };

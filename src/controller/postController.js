@@ -76,8 +76,8 @@ const displayPost = async (req, res) => {
         'articles.first_paragraph',
         'articles.body',
       ).innerJoin('authors', 'articles.author_id', 'authors.id');
+
     const { body, ...mainInfo } = article;
-    console.log(article);
     return article
       ? (req.author.id > 0)
         ? res.status(200).json(article)

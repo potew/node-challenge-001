@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { authMiddleware } = require('./service/tokenService');
 const postController = require('./controller/postController');
@@ -7,11 +8,14 @@ const app = express();
 app.use(express.json());
 // Used to make Express respond requests with jsons in their body.
 
-app.listen(3000, () => console.log('Server listening on port 3000!'));
+const { PORT } = process.env;
+
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}!`));
 app.get('/', (_req, response) => response.send());
 
 app.post('/api/login', authorController.logAuthorIn);
 app.post('/api/sign-up', authorController.registerAuthor);
+app.get('/api/admin/authors/:id', authMiddleware, authorController.selectAuthorById);
 app.put('/api/admin/authors/:id', authMiddleware, authorController.upsertAuthor);
 app.delete('/api/admin/authors/:id', authMiddleware, authorController.deleteById);
 
