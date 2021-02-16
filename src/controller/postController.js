@@ -1,7 +1,4 @@
-const { Op } = require('sequelize');
-const main = require('sha1');
 const Posts = require('../models/ArticlesModel');
-const Authors = require('../models/AuthorsModel');
 const { createPost, upsertPost } = require('../service/postService');
 
 const listAll = async (_req, res) => {

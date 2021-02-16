@@ -43,7 +43,7 @@ const updateAuthor = async (id, data) => {
 };
 
 module.exports = {
-  createAuthor,
   findByEmail,
+  createAuthor,
   updateAuthor,
 };

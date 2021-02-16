@@ -1,12 +1,11 @@
 const express = require('express');
+const { authMiddleware } = require('./service/tokenService');
 const postController = require('./controller/postController');
 const authorController = require('./controller/authorController');
-const { authMiddleware } = require('./service/tokenService');
-
 
 const app = express();
 app.use(express.json());
-// Used to make Express respond requests with jsons on their body.
+// Used to make Express respond requests with jsons in their body.
 
 app.listen(3000, () => console.log('Server listening on port 3000!'));
 app.get('/', (_req, response) => response.send());

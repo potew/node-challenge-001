@@ -1,9 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { findByEmail } = require('./authorService');
 
-// const { jwtsecret } = process.env;
-
-const jwtsecret = '123deOliveira4';
+const { jwtsecret } = process.env;
 
 const jwtConfig = {
   expiresIn: '7d',
@@ -15,7 +13,6 @@ const getToken = (payload) => jwt.sign({ payload }, jwtsecret, jwtConfig);
 const authMiddleware = async (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
-    // return res.status(400).json({ message: 'Token not found' });
     req.author = { id: 0 };
     next();
   } else {

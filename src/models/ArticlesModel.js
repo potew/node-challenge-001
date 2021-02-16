@@ -5,7 +5,7 @@ const Knex = require('knex');
 // Initialize knex.
 const knex = Knex(knexConfig.development)
 
-// Instantiate a knex object
+// Bind all Models to a knex instance.
 Model.knex(knex);
 
 class ArticlesModel extends Model {

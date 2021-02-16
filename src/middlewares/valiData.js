@@ -1,3 +1,14 @@
+const checkLoginFields = (email, password) => {
+  switch (true) {
+    case email === '': ({ message: '"email" is not allowed to be empty' });
+    case password === '': ({ message: '"password" is not allowed to be empty' });
+    case !email: ({ message: '"email" is required' });
+    case !password: ({ message: '"password" is required' });
+    default:
+      false;
+  }
+};
+
 const validateAuthor = ({ name, email, password, picture }) => {
   switch (true) {
     case name.length < 5:
@@ -14,18 +25,7 @@ const validateAuthor = ({ name, email, password, picture }) => {
       ({ message: '"password" length must be at least 6 characters long' });
     default:
       false;
-  }
-};
-
-const checkLoginFields = (email, password) => {
-  switch (true) {
-    case email === '': ({ message: '"email" is not allowed to be empty' });
-    case password === '': ({ message: '"password" is not allowed to be empty' });
-    case !email: ({ message: '"email" is required' });
-    case !password: ({ message: '"password" is required' });
-    default:
-      false;
-  }
+  }    
 };
 
 const validatePostData = ({category, title, summary, first_paragraph, body}) => {
@@ -46,7 +46,7 @@ const validatePostData = ({category, title, summary, first_paragraph, body}) => 
 };
 
 module.exports = {
-  validateAuthor,
   checkLoginFields,
   validatePostData,
+  validateAuthor,
 };
