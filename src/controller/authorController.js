@@ -12,14 +12,14 @@ const {
 const logAuthorIn = async (req, res) => {
   const { email, password } = req.body;
   const emptyFieldsMsg = checkLoginFields(email, password);
-  
+
   if (emptyFieldsMsg) return res.status(400).json(emptyFieldsMsg);
-  
+
   try {
     const authorData = await findByEmail(email);
     return authorData[0].toJSON().password == sha1(password)
-    ? res.status(200).json({ token: getToken(authorData) })
-    : res.status(400).json({ message: 'Invalid username or password!' });
+      ? res.status(200).json({ token: getToken(authorData) })
+      : res.status(400).json({ message: 'Invalid username or password!' });
   } catch (e) {
     res.status(500).json({ message: e });
   }
@@ -62,10 +62,10 @@ const deleteById = async (req, res) => {
   const { id } = req.params;
   const { isAdmin } = req.author;
 
-  const response = await eraseAuthor(id, isAdmin)
+  const response = await eraseAuthor(id, isAdmin);
   return response.message
-  ? res.status(404).json(response.message)
-  : res.status(200).json({ message: `Author with id ${id} has been successfully deleted.` });
+    ? res.status(404).json(response.message)
+    : res.status(200).json({ message: `Author with id ${id} has been successfully deleted.` });
 };
 
 module.exports = {

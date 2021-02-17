@@ -3,7 +3,7 @@ const { createPost, upsertPost } = require('../service/postService');
 
 const listAll = async (_req, res) => {
   try {
-    const postList = await Posts.query()
+    const postList = await Posts.query();
 
     res.status(200).json(postList);
   } catch (e) {
@@ -14,14 +14,13 @@ const listAll = async (_req, res) => {
 const insertPost = async (req, res) => {
   const { id, isAdmin } = req.author;
   const response = await createPost({ author_id: id, ...req.body });
-  
+
   if (isAdmin) {
-  return response.author_id
-    ? res.status(201).json(response)
-    : res.status(400).json({ message: response });
-  } else {
-    res.status(401).json({ message: 'Operation denied for this user type.' })
+    return response.author_id
+      ? res.status(201).json(response)
+      : res.status(400).json({ message: response });
   }
+  res.status(401).json({ message: 'Operation denied for this user type.' });
 };
 
 const updatePost = async (req, res) => {
@@ -32,9 +31,8 @@ const updatePost = async (req, res) => {
     return response.id
       ? res.status(200).json(response)
       : res.status(400).json(response);
-  } else {
-    res.status(401).json({ message: 'Operation denied for this user type.' })
   }
+  res.status(401).json({ message: 'Operation denied for this user type.' });
 };
 
 const erasePost = async (req, res) => {
@@ -45,9 +43,8 @@ const erasePost = async (req, res) => {
     return response
       ? res.status(200).json(response)
       : res.status(404).json({ message: 'Article not found.' });
-  } else {
-    res.status(401).json({ message: 'Operation denied for this user type.' })
   }
+  res.status(401).json({ message: 'Operation denied for this user type.' });
 };
 
 const detailPost = async (req, res) => {
@@ -98,13 +95,13 @@ const listByCategory = async (req, res) => {
         'authors.picture',
         'articles.category',
         'articles.title',
-        'articles.summary'
+        'articles.summary',
       ).join('authors', 'articles.author_id', '=', 'authors.id')
       .where('category', 'like', `%${category}%`);
 
     return articles.length
-    ? res.status(200).json(articles)
-    : res.status(404).json({ message: 'No articles meet the specified criteria.' })
+      ? res.status(200).json(articles)
+      : res.status(404).json({ message: 'No articles meet the specified criteria.' });
   } catch (e) {
     res.status(500).json({ message: e });
   }

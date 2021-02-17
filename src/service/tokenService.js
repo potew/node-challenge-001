@@ -17,13 +17,12 @@ const authMiddleware = async (req, res, next) => {
     req.author = { id: 0, isAdmin: false };
     next();
   } else {
-
     try {
       // JWT decoding & validation
       const { payload } = jwt.verify(token, JWT_SECRET);
       const { email, password } = payload[0];
       const authorModel = await findByEmail(email);
-      const authorObj = authorModel[0].toJSON()
+      const authorObj = authorModel[0].toJSON();
 
       if (!authorObj) return res.status(400).json({ message: 'Token is either expired or invalid' });
 

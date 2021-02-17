@@ -10,8 +10,8 @@ module.exports = {
       host: HOSTNAME,
       user: USER,
       password: PASSWORD,
-      database: DATABASE
-    }
+      database: DATABASE,
+    },
   },
   production: {
     client: ENGINE,
@@ -19,11 +19,11 @@ module.exports = {
       host: HOSTNAME,
       user: USER,
       password: PASSWORD,
-      database: DATABASE
+      database: DATABASE,
     },
     pool: {
       min: 2,
-      max: 10
-    }
-  }
+      max: 10,
+    },
+  },
 };

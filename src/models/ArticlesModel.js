@@ -1,9 +1,9 @@
-const knexConfig = require('../knexfile');
 const { Model } = require('objection');
 const Knex = require('knex');
+const knexConfig = require('../knexfile');
 
 // Initialize knex.
-const knex = Knex(knexConfig.development)
+const knex = Knex(knexConfig.development);
 
 // Bind all Models to a knex instance.
 Model.knex(knex);
@@ -21,7 +21,7 @@ class ArticlesModel extends Model {
     return 'id';
   }
 
-  // Optional JSON schema. For input validation only. 
+  // Optional JSON schema. For input validation only.
   static get jsonSchema() {
     return {
       type: 'object',
@@ -33,9 +33,10 @@ class ArticlesModel extends Model {
         summary: { type: 'string', minLength: 0, maxLength: 255 },
         first_paragraph: { type: 'string', minLength: 10, maxLength: 255 },
         body: { type: 'string', minLength: 10, maxLength: 5000 },
-      }
+      },
     };
   }
+
   // This object defines the relations to other models.
   static get relationMappings() {
     // Importing models here is a one way to avoid require loops.
@@ -47,8 +48,8 @@ class ArticlesModel extends Model {
         modelClass: Author,
         join: {
           from: 'articles.author_id',
-          to: 'authors.id'
-        }
+          to: 'authors.id',
+        },
       },
     };
   }

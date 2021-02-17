@@ -1,17 +1,15 @@
+const sha1 = require('sha1');
 const { validateAuthor } = require('../middlewares/valiData');
 const Authors = require('../models/AuthorsModel');
-const sha1 = require('sha1');
 
 const genericErr = (code, message) => ({
   code,
   message,
 });
 
-const findByEmail = async (email) => {
-  return await Authors.query()
-    .select('id', 'email', 'password', 'isAdmin')
-    .where('authors.email', email)
-}
+const findByEmail = async (email) => await Authors.query()
+  .select('id', 'email', 'password', 'isAdmin')
+  .where('authors.email', email);
 
 const createAuthor = async (data) => {
   const { name, email, password, picture, isAdmin } = data;
@@ -25,9 +23,9 @@ const createAuthor = async (data) => {
     return await Authors.query().insert({
       name,
       email,
-      'password': sha1(password),
+      password: sha1(password),
       picture,
-      isAdmin
+      isAdmin,
     });
   } catch (e) {
     return genericErr(400, e);
@@ -37,7 +35,7 @@ const createAuthor = async (data) => {
 const updateAuthor = async (id, data, admin) => {
   if (admin) {
     try {
-      return await Authors.query().patchAndFetchById(id, data)
+      return await Authors.query().patchAndFetchById(id, data);
     } catch (e) {
       return genericErr(400, e);
     }

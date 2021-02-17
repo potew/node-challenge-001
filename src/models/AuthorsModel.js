@@ -1,9 +1,9 @@
-const knexConfig = require('../knexfile');
 const { Model } = require('objection');
 const Knex = require('knex');
+const knexConfig = require('../knexfile');
 
 // Initialize knex.
-const knex = Knex(knexConfig.development)
+const knex = Knex(knexConfig.development);
 
 // Bind all Models to a knex instance.
 Model.knex(knex);
@@ -21,7 +21,7 @@ class AuthorModel extends Model {
     return 'id';
   }
 
-  // Optional JSON schema. For input validation only. 
+  // Optional JSON schema. For input validation only.
   static get jsonSchema() {
     return {
       type: 'object',
@@ -33,8 +33,8 @@ class AuthorModel extends Model {
         email: { type: 'string', minLength: 5, maxLength: 255 },
         password: { type: 'string', minLength: 6, maxLength: 255 },
         picture: { type: 'string', minLength: 5, maxLength: 255 },
-        isAdmin: { type: 'boolean' }
-      }
+        isAdmin: { type: 'boolean' },
+      },
     };
   }
 
@@ -49,8 +49,8 @@ class AuthorModel extends Model {
         modelClass: Article,
         join: {
           from: 'authors.id',
-          to: 'articles.author_id'
-        }
+          to: 'articles.author_id',
+        },
       },
     };
   }

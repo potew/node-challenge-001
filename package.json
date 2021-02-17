@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Node challenge 001",
   "repository": "https://github.com/JungleDevs/node-challenge-001",
-  "author": "Vinicius de Morais Justo",
+  "author": "André Duarte Palhares",
   "license": "MIT",
   "private": false,
   "engineStrict": true,
@@ -12,7 +12,9 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon --watch src --exec babel-node src/app.js",
-    "debug": "nodemon src/app.js"
+    "debug": "nodemon src/app.js",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
+    "start": "node src/app.js"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -22,6 +24,9 @@
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.16",

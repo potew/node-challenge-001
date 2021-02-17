@@ -25,10 +25,10 @@ const validateAuthor = ({ name, email, password, picture }) => {
       ({ message: '"password" length must be at least 6 characters long' });
     default:
       false;
-  }    
+  }
 };
 
-const validatePostData = ({category, title, summary, first_paragraph, body}) => {
+const validatePostData = ({ category, title, summary, first_paragraph, body }) => {
   switch (true) {
     case !title || title === '':
       ({ message: '"title" is required' });
